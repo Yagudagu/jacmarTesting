@@ -21,13 +21,15 @@ app.get('/', (req, res) => {
     res.end(htmlHome);
 });
 
+console.log('after response')
+
 app.get('/crash', (next) => {
     const david = 19;
     //balls();
     next();
 });
 
-const port = 8000;
+const port = 80;
 app.listen(port, () => {
     console.log(`App running on port ${port}`)
 })
