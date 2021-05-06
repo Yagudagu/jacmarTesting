@@ -1,5 +1,6 @@
 const express = require('express');
-const fs = require("fs");
+//const fs = require("fs");
+const htmlHome = require('./index')
 const path = require('path');
 const { nextTick } = require('process');
 const mongo = require('mongodb');
@@ -12,7 +13,7 @@ const app = express();
 
 
 
-const htmlHome = fs.readFileSync(`${__dirname}/index.html`);
+//const htmlHome = fs.readFileSync(`${__dirname}/index.html`);
 app.use(express.static(path.join(__dirname)))
 
 app.get('/', (req, res) => {
