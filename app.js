@@ -2,17 +2,12 @@ const express = require('express');
 //const fs = require("fs");
 const htmlHome = require('./index')
 const path = require('path');
-const snat = require('./snatStuff')
 // const { nextTick } = require('process');
 // const mongo = require('mongodb');
 // const assert = require('assert');
-
-
+const http = require('http')
 
 const app = express();
-
-
-
 
 //const htmlHome = fs.readFileSync(`${__dirname}/index.html`);
 app.use(express.static(path.join(__dirname)))
@@ -30,9 +25,30 @@ app.get('/crash', (next) => {
     next();
 });
 
-snat.snatRepro()
+app.get('/snatPortExhausion', (req, res, next) => {
+    let = 1;
+    for (i = 0; i < 90; i++) {
+        http.get({
+            host: "google.com",
+            port: 80,
+            path: '/',
+            // agent: false  // create a new agent just for this one request
+          }, (res) => {
+            
+          });
+          console.log(i)
+    }
 
-const port = process.env.PORT || 3000
+    
+    res.status(200).json({
+        status: 'did it',
+        data: i
+    });
+});
+
+
+//const port = process.env.PORT || 3000
+const port = 3000;
 
 app.listen(port, () => {
     console.log(`App running on port ${port}`)
