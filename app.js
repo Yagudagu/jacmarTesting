@@ -41,7 +41,8 @@ app.get("/snatPortExhausion", (req, res, next) => {
   }
 
   app.get("/file", (req, res, next) => {
-    res.status.apply(200).sendFile(theFile);
+    console.log("balls");
+    res.status(200).sendFile(theFile);
   });
 
   res.status(200).json({
