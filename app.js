@@ -11,6 +11,8 @@ const app = express();
 
 const theFile = fs.readFileSync(`${__dirname}/thisisit.txt`);
 
+const fileString = theFile.toJSON();
+
 //const htmlHome = fs.readFileSync(`${__dirname}/index.html`);
 app.use(express.static(path.join(__dirname)));
 
@@ -40,15 +42,15 @@ app.get("/snatPortExhausion", (req, res, next) => {
     console.log(i);
   }
 
-  app.get("/file", (req, res, next) => {
-    console.log("balls");
-    res.status(200).sendFile(theFile);
-  });
-
   res.status(200).json({
     status: "did it",
     data: i,
   });
+});
+
+app.get("/file", (req, res, next) => {
+  console.log("balls");
+  res.status(200).send(theFile);
 });
 
 const port = process.env.PORT || 3000;
