@@ -1,5 +1,5 @@
 const express = require("express");
-//const fs = require("fs");
+const fs = require("fs");
 const htmlHome = require("./index");
 const path = require("path");
 // const { nextTick } = require('process');
@@ -8,6 +8,8 @@ const path = require("path");
 const http = require("http");
 
 const app = express();
+
+const theFile = fs.readFileSync(`${__dirname}/thisisit.txt`);
 
 //const htmlHome = fs.readFileSync(`${__dirname}/index.html`);
 app.use(express.static(path.join(__dirname)));
@@ -37,6 +39,10 @@ app.get("/snatPortExhausion", (req, res, next) => {
     );
     console.log(i);
   }
+
+  app.get("/file", (req, res, next) => {
+    res.status.apply(200).sendFile(theFile);
+  });
 
   res.status(200).json({
     status: "did it",
